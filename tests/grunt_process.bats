@@ -48,3 +48,23 @@ setup () {
     assert_output --partial "ERROR: Some modules are not properly processed by grunt. Changes detected:"
     assert_output --regexp "GRUNT-CHANGE: (.*)/lib/amd/build/url.min.js"
 }
+
+@test "grunt_process: Uncommited ignorefiles change" {
+    # When a third party library is added, developers need to commit
+    # ignorefiles change since 3.2.
+
+    # Testing on in-dev 3.2dev
+    create_git_branch 32-dev 5a1728df39116fc701cc907e85a638aa7674f416
+    cd $gitdir
+    $gitcmd am $BATS_TEST_DIRNAME/fixtures/32-thirdparty-lib-added.patch
+
+    # Run test
+    cd $BATS_TEST_DIRNAME/../grunt_process/
+    run ./grunt_process.sh
+
+    # Assert result
+    assert_failure
+    assert_output --partial "ERROR: Some modules are not properly processed by grunt. Changes detected:"
+    assert_output --regexp "GRUNT-CHANGE: (.*)/.eslintignore"
+}
+
