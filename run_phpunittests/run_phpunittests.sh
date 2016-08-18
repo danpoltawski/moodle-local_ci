@@ -40,6 +40,9 @@ if [[ "${dbtype}" == "pgsql" ]]; then
 elif [[ "${dbtype}" == "mysqli" ]]; then
     ${mysqlcmd} --user=${dbuser} --password=${dbpass} --host=${dbhost} \
         --execute="CREATE DATABASE ${installdb} CHARACTER SET utf8 COLLATE utf8_bin"
+elif [[ "${dbtype}" == "oci" ]]; then
+    echo 'not creating oracle db..'
+    installdb=xe
 else
     echo "Error: Incorrect dbtype=${dbtype}"
     exit 1
@@ -87,7 +90,7 @@ mkdir ${datadir}
 mkdir ${datadirphpunit}
 
 # Run the phpunit init script
-${phpcmd} ${gitdir}/admin/tool/phpunit/cli/util.php --install
+${phpcmd} ${gitdir}/admin/tool/phpunit/cli/init.php
 exitstatus=${PIPESTATUS[0]}
 if [ $exitstatus -ne 0 ]; then
     echo "Error installing database $installdb to run phpunit tests"
@@ -210,6 +213,8 @@ if [[ "${dbtype}" == "pgsql" ]]; then
 elif [[ "${dbtype}" == "mysqli" ]]; then
     ${mysqlcmd} --user=${dbuser} --password=${dbpass} --host=${dbhost} \
         --execute="DROP DATABASE ${installdb}"
+elif [[ "${dbtype}" == "oci" ]]; then
+    echo "Not dropping db.. its oracle"
 else
     echo "Error: Incorrect dbtype=${dbtype}"
     exit 1
