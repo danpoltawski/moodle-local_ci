@@ -54,7 +54,6 @@ def integration(branch) {
         // We don't actually  get newlines in the output here, but oh well!
         def extraconfig = \
         "\
-        define('TEST_CACHESTORE_MEMCACHED_TESTSERVERS', 'memecache0');\
         define('TEST_SESSION_REDIS_HOST', 'redis0');\
         define('TEST_SEARCH_SOLR_HOSTNAME', 'solr0');\
         define('TEST_SEARCH_SOLR_PORT', '8983');\
