@@ -100,3 +100,8 @@ assert_prechecker () {
     assert_prechecker fixture-good-amos-commit MDL-12345 6f302b17b97078059d4f02d747abf5822a064e87 \
     "smurf,success,0,0:phplint,success,0,0;phpcs,success,0,0;js,success,0,0;css,success,0,0;phpdoc,success,0,0;commit,success,0,0;savepoint,success,0,0;thirdparty,success,0,0;grunt,success,0,0;shifter,success,0,0;travis,success,0,0"
 }
+
+@test "remote_branch_checker/remote_branch_checker.sh: third party ingores" {
+    assert_prechecker third-party-cs-fixture MDL-12345 1f2744851fb50cae6602510d3651ecf9797d24a1 \
+    "smurf,error,3,0:phplint,success,0,0;phpcs,error,3,0;js,success,0,0;css,success,0,0;phpdoc,success,0,0;commit,success,0,0;savepoint,success,0,0;thirdparty,success,0,0;grunt,success,0,0;shifter,success,0,0;travis,success,0,0"
+}

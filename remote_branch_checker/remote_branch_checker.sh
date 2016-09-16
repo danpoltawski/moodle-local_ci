@@ -431,9 +431,11 @@ echo "Info: Running phpcs..."
 if [[ ! -n "${phpcsstandard}" ]]; then
     phpcsstandard="${mydir}/../../codechecker/moodle"
 fi
+
+phpcsignores=$(grep -v '#' .eslintignore | tr '\n' ',')
 ${phpcmd} ${mydir}/../vendor/bin/phpcs \
     --report=checkstyle --report-file="${WORKSPACE}/work/cs.xml" \
-    --extensions=php --standard=${phpcsstandard} ${WORKSPACE}
+    --extensions=php --standard=${phpcsstandard} --ignore=$phpcsignores ${WORKSPACE}
 
 if [[ -n "${LOCAL_CI_TESTS_RUNNING}" ]]; then
     # We don't run the moodlecheck tests in our testing environment because local_moodlecheck requires
