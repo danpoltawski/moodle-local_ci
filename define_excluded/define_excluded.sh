@@ -106,7 +106,7 @@ if [[ -n ${gitdir} ]]; then
 fi
 
 # Sort and get rid of dupes, they (maybe) are legion.
-excluded=$(LC_ALL=C; echo "${excluded}" | sort -u)
+excluded=$(export LC_ALL=C; echo "${excluded}" | sort -u)
 
 # Some well-known exceptions... to be deleted once the branch
 # gets out from support
