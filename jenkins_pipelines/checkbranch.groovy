@@ -32,20 +32,20 @@ def integration(branch) {
 //        echo "From: ${env.GIT_PREVIOUS_COMMIT}"
 //        echo "To: ${env.GIT_COMMIT}"
 
-        stage 'Check for illegal whitespace'
-        sh "${local_ci}/illegal_whitespace/illegal_whitespace.sh"
-
-        stage 'Detect conflicts'
-        sh "${local_ci}/detect_conflicts/detect_conflicts.sh"
-
-        stage 'Check savepoints'
-        sh "${local_ci}/check_upgrade_savepoints/check_upgrade_savepoints.sh"
-
-        stage 'Check version.php files'
-        sh "${local_ci}/versions_check_set/versions_check_set.sh"
-
-        stage 'grunt'
-        sh "${local_ci}/grunt_process/grunt_process.sh"
+//        stage 'Check for illegal whitespace'
+//        sh "${local_ci}/illegal_whitespace/illegal_whitespace.sh"
+//
+//        stage 'Detect conflicts'
+//        sh "${local_ci}/detect_conflicts/detect_conflicts.sh"
+//
+//        stage 'Check savepoints'
+//        sh "${local_ci}/check_upgrade_savepoints/check_upgrade_savepoints.sh"
+//
+//        stage 'Check version.php files'
+//        sh "${local_ci}/versions_check_set/versions_check_set.sh"
+//
+//        stage 'grunt'
+//        sh "${local_ci}/grunt_process/grunt_process.sh"
 
         stage 'php -l'
         sh "${local_ci}/php_lint/php_lint.sh"
